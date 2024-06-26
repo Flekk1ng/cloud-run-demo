@@ -33,6 +33,8 @@ steps:
   - 'europe-west1'
   - '--platform'
   - 'managed'
+  - '--port'
+  - '80'
   - '--allow-unauthenticated'
   
 - id: deploy-api
@@ -48,6 +50,8 @@ steps:
   - 'europe-west1'
   - '--platform'
   - 'managed'
+  - '--port'
+  - '80'
   - '--allow-unauthenticated'
 
 options:
