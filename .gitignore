@@ -1,0 +1,24 @@
+# Python
+api/__pycache__/
+api/*.py[cod]
+api/env/
+api/venv/
+
+# React
+ui/node_modules/
+ui/build/
+ui/.pnp
+ui/.pnp.js
+ui/coverage
+ui/build
+ui/dist
+ui/tmp
+ui/out-tsc
+ui/bazel-out
+
+.DS_Store
+.idea/
+*.swp
+
+/kubernetes/
+/tests/
