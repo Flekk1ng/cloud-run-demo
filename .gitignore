@@ -20,5 +20,7 @@ ui/bazel-out
 .idea/
 *.swp
 
+docker-compose.yml
+
 /kubernetes/
 /tests/
