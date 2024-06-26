@@ -30,7 +30,7 @@ steps:
   - '--image'
   - 'gcr.io/$PROJECT_ID/ui-app:$COMMIT_SHA'
   - '--region'
-  - 'europe-north1'
+  - 'europe-west1'
   - '--platform'
   - 'managed'
   - '--allow-unauthenticated'
@@ -45,10 +45,10 @@ steps:
   - '--image'
   - 'gcr.io/$PROJECT_ID/api-app:$COMMIT_SHA'
   - '--region'
-  - 'europe-north1'
+  - 'europe-west1'
   - '--platform'
   - 'managed'
   - '--allow-unauthenticated'
-    
+
 options:
   logging: CLOUD_LOGGING_ONLY
