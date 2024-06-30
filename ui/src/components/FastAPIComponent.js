@@ -8,7 +8,7 @@ const FastAPIComponent = () => {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await fetch('http://34.88.58.149/');
+                const response = await fetch('https://api-zpx7ve2gga-ew.a.run.app/');
                 const data = await response.json();
                 setMessage(data.message);
             } catch {
