@@ -3,6 +3,8 @@ api/__pycache__/
 api/*.py[cod]
 api/env/
 api/venv/
+api/uploaded_csvs/*
+api/processed_xls/*
 
 # React
 ui/node_modules/

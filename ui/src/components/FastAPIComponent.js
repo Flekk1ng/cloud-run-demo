@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react';
 
-import {Highlight, Center, Heading, Text} from '@chakra-ui/react';
+import {Highlight, Center, Text} from '@chakra-ui/react';
 
 const FastAPIComponent = () => {
     const [message, setMessage] = useState('');

@@ -1,4 +1,4 @@
-import {Card, Box, Heading, Text, Button, Center} from "@chakra-ui/react";
+import {Card, Box, Heading, Text, Center} from "@chakra-ui/react";
 import ToastExample from "./ToastExample";
 
 const CardComponent = () => {

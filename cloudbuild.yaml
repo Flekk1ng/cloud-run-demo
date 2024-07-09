@@ -26,7 +26,7 @@ steps:
   args:
   - 'run'
   - 'deploy'
-  - 'react-app'
+  - 'csv-transformer'
   - '--image'
   - 'gcr.io/$PROJECT_ID/ui-app:$COMMIT_SHA'
   - '--region'
@@ -43,7 +43,7 @@ steps:
   args:
   - 'run'
   - 'deploy'
-  - 'api'
+  - 'csv-transformer-api'
   - '--image'
   - 'gcr.io/$PROJECT_ID/api-app:$COMMIT_SHA'
   - '--region'
