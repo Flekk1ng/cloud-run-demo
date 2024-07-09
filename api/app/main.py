@@ -12,7 +12,7 @@ from app import constants as c
 
 app = FastAPI()
 
-origins = ["https://csv-transformer-api-zpx7ve2gga-ew.a.run.app/"]
+origins = ["https://csv-transformer-zpx7ve2gga-ew.a.run.app/"]
 
 app.add_middleware(
     CORSMiddleware,
