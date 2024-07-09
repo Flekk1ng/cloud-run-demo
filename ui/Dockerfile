@@ -4,10 +4,12 @@ WORKDIR /app/ui
 
 COPY package.json .
 
+RUN npm install
+
 COPY . .
 
-RUN npm install
+RUN npm run build
 
 EXPOSE 80
 
-CMD ["npm", "run", "build"]
+CMD ["npm", "run", "preview"]
