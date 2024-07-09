@@ -12,7 +12,7 @@ from app import constants as c
 
 app = FastAPI()
 
-origins = ["*"]
+origins = ["https://csv-transformer-api-zpx7ve2gga-ew.a.run.app/"]
 
 app.add_middleware(
     CORSMiddleware,
@@ -21,6 +21,12 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+try:
+    os.mkdir(utils.get_upload_path())
+    os.mkdir(utils.get_download_path())
+except FileExistsError:
+    pass
 
 
 @app.post("/upload")
