@@ -60,4 +60,11 @@ def get_csv_names():
     for filename in os.listdir(upload_directory):
         if os.path.isfile(os.path.join(upload_directory, filename)):
             file_names.append(filename)
+
+    if not file_names:
+        raise Exception("Нет загруженных csv файлов.")
+    
+    if len(file_names) < 12:
+        raise Exception("Мало загруженных файлов для создания отчета. Проверьте загруженные файлы.")
+    
     return file_names

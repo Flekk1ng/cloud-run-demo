@@ -15,6 +15,7 @@ def run_tasks(*, report_type_country_filenames, output_filename):
     task_five(report_type=c.REPORT_TYPES[4], country_file_names_for_task=report_type_country_filenames[c.REPORT_TYPES[4]], output_filename=output_filename)
     task_six(report_type=c.REPORT_TYPES[5], country_file_names_for_task=report_type_country_filenames[c.REPORT_TYPES[5]], output_filename=output_filename)
 
+
 def task_one(*, report_type, country_file_names_for_task, output_filename):
     """
     Формирование первой страницы отчета (для country_monthly_data) 
@@ -41,7 +42,10 @@ def task_one(*, report_type, country_file_names_for_task, output_filename):
 
         df.T.to_excel(writer, sheet_name=report_type, startrow=(i - 1) * (len(dataframes.keys()) + 3), index=False, header=False)
 
-    xls_styles.set_styles(writer, report_type, [0])
+    ws = writer.sheets[report_type]
+    format_numbers(ws)
+
+    xls_styles.set_styles(writer, report_type, list(range(25)))
 
     writer.close()
 
@@ -93,6 +97,8 @@ def task_two(*, report_type, country_file_names_for_task, output_filename):
                     cell = ws.cell(row=row_num, column=col_num)
                     cell.number_format = numbers.FORMAT_PERCENTAGE_00
 
+    format_numbers(ws)
+
     xls_styles.set_styles(writer, report_type, list(range(9)))
 
     writer.close()
@@ -102,7 +108,6 @@ def task_three(*, report_type, country_file_names_for_task, output_filename):
     """
     Формирование третьей страницы отчета (для global_data_product) 
     """
-    
     file_names_for_task = [file_name_for_task for _, file_name_for_task in country_file_names_for_task.items()]
     
     dataframe = pd.read_csv(os.path.join(utils.get_upload_path(), file_names_for_task[0]), header=None).T
@@ -125,6 +130,8 @@ def task_three(*, report_type, country_file_names_for_task, output_filename):
         for row_num in range(4, 6):
             cell = ws.cell(row=row_num, column=col_num)
             cell.number_format = numbers.FORMAT_PERCENTAGE_00
+
+    format_numbers(ws)
 
     xls_styles.set_styles(writer, report_type, [0])
 
@@ -167,6 +174,8 @@ def task_four(*, report_type, country_file_names_for_task, output_filename):
         for row_num in [r + 1 for r in perc_rows]:
             cell = ws.cell(row=row_num, column=col_num)
             cell.number_format = numbers.FORMAT_PERCENTAGE_00
+
+    format_numbers(ws)
 
     xls_styles.set_styles(writer, report_type, list(range(len(dataframes.keys()) + 1)))
 
@@ -221,8 +230,6 @@ def task_five(*, report_type, country_file_names_for_task, output_filename):
 
     new_final_dataframe.to_excel(writer, sheet_name=report_type, index=False, header=True)
 
-    xls_styles.set_styles(writer, report_type, list(range(0, 7)))
-
     ws = writer.sheets[report_type]
 
     for row_num in range(1, ws.max_row + 1):
@@ -235,6 +242,10 @@ def task_five(*, report_type, country_file_names_for_task, output_filename):
             for col in range(1, ws.max_column + 1):
                 cell = ws.cell(row=row_num + 1, column=col)
                 cell.font = cell.font.copy(bold=True)
+
+    format_numbers(ws)
+
+    xls_styles.set_styles(writer, report_type, list(range(0, 7)))
 
     writer.close()
 
@@ -302,8 +313,6 @@ def task_six(*, report_type, country_file_names_for_task, output_filename):
 
     new_final_dataframe.to_excel(writer, sheet_name=report_type, index=False, header=True)
 
-    xls_styles.set_styles(writer, report_type, list(range(0, 10)))
-
     ws = writer.sheets[report_type]
 
     for row_num in range(1, ws.max_row + 1):
@@ -317,7 +326,22 @@ def task_six(*, report_type, country_file_names_for_task, output_filename):
                 cell = ws.cell(row=row_num + 1, column=col)
                 cell.font = cell.font.copy(bold=True)
 
+    format_numbers(ws)
+
+    xls_styles.set_styles(writer, report_type, list(range(0, 10)))
+
     writer.close()
+
+
+def format_numbers(ws):
+    """
+    Форматирует числа в ячейках таблицы
+    """
+    for row in range(1, ws.max_row + 1):
+        for col in range(1, ws.max_column + 1):
+            cell = ws.cell(row=row, column=col)
+            if isinstance(cell.value, (int, float)) and cell.number_format != numbers.FORMAT_PERCENTAGE_00:
+                cell.number_format = numbers.FORMAT_NUMBER_COMMA_SEPARATED1
 
 
 def get_writer(*, output_filename, new: bool) -> pd.ExcelWriter:
